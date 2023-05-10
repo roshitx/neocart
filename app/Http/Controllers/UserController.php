@@ -37,14 +37,13 @@ class UserController extends Controller
         $validatedData = $request->validate([
             'name' => 'string|required|min:3',
             'email' => 'string|required|email|unique:users,email',
-            'password' => 'nullable|string',
+            'password' => 'required|string|min:5',
             'birth' => 'date',
-            'gender' => 'required|string',
-            'role' => 'required|string'
+            'gender' => 'required',
+            'role' => 'required'
         ]);
 
-        $validatedData['password'] = $validatedData['password'] ?? Hash::make('password');
-
+        $validatedData['password'] = Hash::make($validatedData['password']);
         User::create($validatedData);
         return redirect()->route('users.index')->with('success', "Successfully added new user.");
     }

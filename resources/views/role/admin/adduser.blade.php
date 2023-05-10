@@ -36,6 +36,19 @@
 								@enderror
 							</div>
 							<div class="mb-3">
+								<label for="password" class="form-label">Password: <span class="text-danger">*</span></label>
+								<input type="password" name="password"
+									class="form-control @error('password')
+                                    is-invalid
+                                @enderror"
+									placeholder="Make a strong password" id="password">
+								@error('password')
+									<div class="invalid-feedback">
+										{{ $message }}
+									</div>
+								@enderror
+							</div>
+							<div class="mb-3">
 								<label for="birth" class="form-label">Birth:</label>
 								<input type="date" name="birth"
 									class="form-control @error('birth')
@@ -51,22 +64,23 @@
 							<div class="mb-3">
 								<label for="gender" class="form-label">Gender: <span class="text-danger">*</span></label>
 								<select class="form-select" name="gender">
-									<option value="Male">Male</option>
-									<option value="Female">Female</option>
-									<option value="Other" selected>Other</option>
+									<option value="Male" {{ old('gender') === 'Male' ? 'selected' : '' }}>Male</option>
+									<option value="Female" {{ old('gender') === 'Female' ? 'selected' : '' }}>Female</option>
+									<option value="Other" {{ old('gender') === 'Other' ? 'selected' : '' }}>Other</option>
 								</select>
 							</div>
 							<div class="mb-4">
 								<label for="role" class="form-label">Role: <span class="text-danger">*</span></label>
 								<select class="form-select" name="role">
-									<option value="Client">Client</option>
-									<option value="Admin">Admin</option>
-									<option value="Seller">Seller</option>
+									<option value="Client" {{ old('role') === 'Client' ? 'selected' : '' }}>Client</option>
+									<option value="Admin" {{ old('role') === 'Admin' ? 'selected' : '' }}>Admin</option>
+									<option value="Seller" {{ old('role') === 'Seller' ? 'selected' : '' }}>Seller</option>
 								</select>
 							</div>
+							
 
 							<div class="d-flex justify-content-between">
-								<a href="{{ route('all.users') }}" class="btn btn-warning">Back</a>
+								<a href="{{ route('users.index') }}" class="btn btn-warning">Back</a>
 								<button type="submit" class="btn btn-primary">Add</button>
 							</div>
 						</form>
